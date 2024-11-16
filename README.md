@@ -15,7 +15,7 @@ pip install -e .
 pip install overcooked_ai
 pip install dill
 ```
-
+---
 ## Tasks
 
 ### GridWorld-USAR
@@ -29,6 +29,7 @@ The overcooked-ai task is built based on this [package](https://github.com/Human
 
 <img src="./videos/overcooked_vis2/episode_2.gif" alt="3 agent Overcooked" width="250"/>
 
+---
 ## Example: train Overcooked
 Training a 3 agent Overcooked task
 ```bash
@@ -54,8 +55,11 @@ tune.run(
     callbacks = [CustomCheckpointCallback(args.model_path)]
 )
 ```
-
+---
 ## Implementation details
 The core functions of training including policies, trainer, and callbacks are in `infrustracture`. `agent_policy.py` defines agent policies that generate actions to interact with environments and compute loss given samples. `agent_trainer.py` defines the on-policy training algorithm of PPO. `callbacks.py` handles some result logging process. The sampling and training process is handled by rllib workers, as shown in the illustration.
 
 <img src="./figs/rllib.png" alt="3 agent Overcooked" width="800"/>
+
+\
+When configuring a Multi-Agent Reinforcement Learning (MARL) algorithm, each agent's observation space is defined within a dictionary where the keys are the agent IDs and the values are the corresponding observation space objects, allowing RLlib to differentiate and handle the unique observations for each agent in the environment. This is specified in the `multiagent` configuration in `train.py`, mapping each agent id to its specific policy and observation space.

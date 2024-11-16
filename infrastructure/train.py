@@ -40,9 +40,9 @@ def train(args):
     Config["BASE_CONFIG"]["multiagent"] = {
         "policies": {
             "pol" + str(i+1):(
-                None,
-                Config["BASE_CONFIG"]["env_config"]["observation_space"],
-                Config["BASE_CONFIG"]["env_config"]["action_space"],
+                None, # policy spec
+                None, # observation spec
+                None, # action spec
                 {
                     "name": "pol" + str(i+1),
                     "framework": "torch",

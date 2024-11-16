@@ -63,14 +63,6 @@ class ConfigLoader():
         config["BASE_CONFIG"]["model"] = config["MODEL_CONFIG"]
         config["BASE_CONFIG"]["callbacks"] = LoggingCallbacks
         config["BASE_CONFIG"]["num_gpus"] = 1 if torch.cuda.is_available() else 0
-        config["EAT_AGENT_CONFIG"]["teacher_model_config"] = config["MODEL_CONFIG"]
-        config["BASE_CONFIG"]["env_config"]["observation_space"] = gym.spaces.Dict({
-            "image": gym.spaces.Box(0, float('inf'), shape=(23,6,5), dtype=np.float32),
-            "action_mask": gym.spaces.Box(0.0, 1.0, shape=(6,),dtype=np.float32),
-        })
-        config["BASE_CONFIG"]["env_config"]["action_space"] = gym.spaces.Discrete(6)
-        # config["EAT_AGENT_CONFIG"]["observation_space"] = config["BASE_CONFIG"]["env_config"]["observation_space"]
-        # config["EAT_AGENT_CONFIG"]["action_space"] = config["BASE_CONFIG"]["env_config"]["action_space"]
 
         return config
     _initialize_configs = staticmethod(_initialize_configs)
