@@ -1,0 +1,96 @@
+MODEL_CONFIG:
+  custom_model: cc_model
+  custom_model_config:
+    input_conv_channels: 4
+    critic_share_layers: false
+    conv_filters:
+      - - 16
+        - - 2
+          - 2
+        - 1
+        - None
+      - - pool
+        - - 2
+          - 2
+        - 2
+      - - 32
+        - - 2
+          - 2
+        - 1
+        - None
+      - - 64
+        - - 2
+          - 2
+        - 1
+        - None
+    actor_layer_sizes:
+      - - 1600
+        - 8
+    critic_layer_sizes:
+      - - 1600
+        - 1
+    action_masking: true
+ENV_CONFIG:
+  max_steps: 300
+  n_agents: 3
+  view_size: 13
+  act_dim: 8
+  obs_dim: 4
+  config:
+    - - wwow
+      - owwo
+    - - wwow
+      - ooww
+  start_rooms:
+    - - 0
+      - 1
+  goal_rooms:
+    - - 0
+      - 0
+    - - 0
+      - 1
+    - - 1
+      - 0
+    - - 1
+      - 1
+  rubble_rooms:
+    - - 0
+      - 0
+    - - 0
+      - 1
+    - - 1
+      - 0
+    - - 1
+      - 1
+  room_size: 3
+BASE_CONFIG:
+  env: usar
+  sgd_minibatch_size: 512
+  num_sgd_iter: 4
+  train_batch_size: 2048
+  lr: 0
+  lambda: 0.8
+  kl_coeff: 0.5
+  clip_rewards: false
+  clip_param: 0.2
+  vf_clip_param: 10
+  vf_loss_coeff: 0.5
+  entropy_coeff: 0.01
+  gamma: 0.99
+  rollout_fragment_length: auto
+  batch_mode: truncate_episodes
+  num_workers: 4
+  num_envs_per_worker: 8
+  num_cpus_per_worker: 1
+  num_cpus_for_driver: 2
+  num_gpus: 1
+  num_gpus_per_worker: 0.2
+  evaluation_num_workers: 1
+  evaluation_interval: 3
+  evaluation_duration: 20
+  evaluation_duration_unit: episodes
+  evaluation_parallel_to_training: true
+  evaluation_config:
+    num_envs_per_worker: 10
+  framework: torch
+  use_gae: true
